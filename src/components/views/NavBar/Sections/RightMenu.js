@@ -5,20 +5,23 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 function RightMenu(props) {
   const user = useSelector(state => state.userReducer);
 
   const logoutHandler = () => {
-    axios.get('/logout').then(response => {
-      if (response.status === 200) {
-        props.history.push('/login');
-      } else {
-        alert('Log Out Failed');
-      }
-    });
+    axios
+      .get(`${apiUrl}/api/logout`, { withCredentials: true })
+      .then(response => {
+        if (response.status === 200) {
+          props.history.push('/login');
+        } else {
+          alert('Log Out Failed');
+        }
+      });
   };
-
-  if (user.auth && !user.login) {
+  if (user.auth && !user.auth.isAuth) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
@@ -33,9 +36,7 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="logout">
-          <a href="#" onClick={logoutHandler}>
-            Logout
-          </a>
+          <a onClick={logoutHandler}>Logout</a>
         </Menu.Item>
       </Menu>
     );
