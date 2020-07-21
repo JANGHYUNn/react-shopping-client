@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-function FileUpload() {
+function FileUpload(props) {
   const [Images, setImages] = useState([]);
 
   const dropHandler = files => {
@@ -24,10 +24,21 @@ function FileUpload() {
       .then(response => {
         if (response.data.success) {
           setImages([...Images, response.data.filePath]);
+          props.refreshFunction([...Images, response.data.filePath]);
         } else {
           console.log(response);
         }
       });
+  };
+
+  const deleteHandler = image => {
+    const currentIdx = Images.indexOf(image);
+
+    const newImages = [...Images];
+    newImages.splice(currentIdx, 1);
+
+    setImages(newImages);
+    props.refreshFunction(newImages);
   };
 
   return (
@@ -75,8 +86,21 @@ function FileUpload() {
             >
               {index + 1}
             </span>
+            <span
+              style={{
+                position: 'absolute',
+                top: '5px',
+                right: '7px',
+                fontSize: '1rem',
+                color: '#fff',
+                cursor: 'pointer',
+              }}
+              onClick={() => deleteHandler(image)}
+            >
+              delete
+            </span>
           </div>
-        ))}
+        )).reverse()}
       </div>
     </div>
   );
