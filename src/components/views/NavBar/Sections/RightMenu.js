@@ -12,7 +12,7 @@ function RightMenu(props) {
 
   const logoutHandler = () => {
     axios
-      .get(`${apiUrl}/api/logout`, { withCredentials: true })
+      .get(`${apiUrl}/api/user/logout`, { withCredentials: true })
       .then(response => {
         if (response.status === 200) {
           props.history.push('/login');
@@ -35,6 +35,9 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="upload">
+          <a href="/product/upload">Upload</a>
+        </Menu.Item>
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>Logout</a>
         </Menu.Item>

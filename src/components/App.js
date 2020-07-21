@@ -8,6 +8,7 @@ import LandingPage from './views/LandingPage/LandingPage';
 import Footer from './views/Footer/Footer';
 import RegisterPage from './views/RegisterPage/RegisterPage';
 import LoginPage from './views/LoginPage/LoginPage';
+import UploadProductPage from './views/UploadProductPage/UploadProductPage';
 
 // hoc
 import auth from '../hoc/auth';
@@ -21,6 +22,11 @@ function App() {
           <Route exact path="/" component={auth(LandingPage, null)} />
           <Route exact path="/login" component={auth(LoginPage, false)} />
           <Route exact path="/register" component={auth(RegisterPage, false)} />
+          <Route
+            exact
+            path="/product/upload"
+            component={auth(UploadProductPage, true)}
+          />
         </Switch>
       </div>
       <Footer />

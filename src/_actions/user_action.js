@@ -4,7 +4,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 // action type, data 정의
 export async function loginUser(userInfo) {
-  const { data } = await axios.post(`${apiUrl}/api/login`, userInfo, {
+  const { data } = await axios.post(`${apiUrl}/api/user/login`, userInfo, {
     withCredentials: true,
   });
   return {
@@ -14,7 +14,7 @@ export async function loginUser(userInfo) {
 }
 
 export async function register(userInfo) {
-  const { data } = await axios.post(`${apiUrl}/api/register`, userInfo);
+  const { data } = await axios.post(`${apiUrl}/api/user/register`, userInfo);
   return {
     type: 'REGISTER',
     payload: data,
@@ -22,7 +22,7 @@ export async function register(userInfo) {
 }
 
 export async function auth() {
-  const { data } = await axios.get(`${apiUrl}/api/auth`, {
+  const { data } = await axios.get(`${apiUrl}/api/user/auth`, {
     withCredentials: true,
   });
   return {
@@ -32,7 +32,7 @@ export async function auth() {
 }
 
 export async function logout() {
-  const { data } = await axios.get(`${apiUrl}/api/logout`, {
+  const { data } = await axios.get(`${apiUrl}/api/user/logout`, {
     withCredentials: true,
   });
   return {

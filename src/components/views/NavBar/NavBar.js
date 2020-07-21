@@ -1,8 +1,10 @@
+/* eslint-disable import/order */
 import React, { useState } from 'react';
 import { Drawer, Button } from 'antd';
 import LeftMenu from './Sections/LeftMenu';
 import RightMenu from './Sections/RightMenu';
 import './Sections/NavBar.css';
+import { MenuOutlined } from '@ant-design/icons';
 
 function NavBar() {
   const [visible, setVisible] = useState(false);
@@ -30,12 +32,13 @@ function NavBar() {
         <div className="menu_rigth">
           <RightMenu mode="horizontal" />
         </div>
+        {/* 반응형 start */}
         <Button
           className="menu__mobile-button"
           type="primary"
           onClick={showDrawer}
         >
-          {/* <Icon type="align-right" /> */}
+          <MenuOutlined />
         </Button>
         <Drawer
           title="Basic Drawer"
@@ -48,6 +51,7 @@ function NavBar() {
           <LeftMenu mode="inline" />
           <RightMenu mode="inline" />
         </Drawer>
+        {/* 반응형 end */}
       </div>
     </nav>
   );

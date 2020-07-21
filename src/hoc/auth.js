@@ -1,3 +1,5 @@
+/* eslint-disable no-lonely-if */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { auth } from '../_actions/user_action';
@@ -14,8 +16,23 @@ export default function (SpecificComponent, option, adminRoute = null) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(auth()).then(response => {});
-    }, [dispatch]);
+      dispatch(auth()).then(response => {
+        console.log(response);
+        // 로그인 하지 않은 상태
+        if (!response.payload.isAuth) {
+          if (option) props.history.push('/login');
+        } else {
+          // 관리자 접근 라우트 인데 관리자가 아닐경우
+          if (adminRoute && !response.payload.isAdmin) {
+            props.history.push('/');
+          } else {
+            if (!option) {
+              props.history.push('/');
+            }
+          }
+        }
+      });
+    }, []);
 
     return <SpecificComponent {...props} user={user} />;
   }
