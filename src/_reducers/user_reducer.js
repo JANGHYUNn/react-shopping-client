@@ -6,6 +6,8 @@ export default function (state = {}, action) {
       return { ...state, register: action.payload };
     case 'AUTH':
       return { ...state, auth: action.payload };
+    case 'ADDTOCART':
+      return { ...state };
     default:
       return state;
   }

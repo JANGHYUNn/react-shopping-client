@@ -40,3 +40,14 @@ export async function logout() {
     payload: data,
   };
 }
+
+export async function addToCart(cartInfo) {
+  const body = {
+    productId: cartInfo,
+  };
+  const { data } = await axios.post(`${apiUrl}/api/user/addToCart`, body);
+  return {
+    type: 'ADDTOCART',
+    payload: data,
+  };
+}
