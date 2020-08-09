@@ -10,6 +10,7 @@ import RegisterPage from './views/RegisterPage/RegisterPage';
 import LoginPage from './views/LoginPage/LoginPage';
 import UploadProductPage from './views/UploadProductPage/UploadProductPage';
 import DetailProductPage from './views/DetailProductPage/DetailProductPage';
+import CartPage from './views/CartPage/CartPage';
 
 // hoc
 import auth from '../hoc/auth';
@@ -33,6 +34,7 @@ function App() {
             path="/product/:productId"
             component={auth(DetailProductPage, null)}
           />
+          <Route exact path="/user/cart" component={auth(CartPage, true)} />
         </Switch>
       </div>
       <Footer />

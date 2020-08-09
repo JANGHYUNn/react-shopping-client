@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -45,9 +46,28 @@ export async function addToCart(cartInfo) {
   const body = {
     productId: cartInfo,
   };
-  const { data } = await axios.post(`${apiUrl}/api/user/addToCart`, body);
+  const { data } = await axios.post(`${apiUrl}/api/user/addToCart`, body, {
+    withCredentials: true,
+  });
   return {
     type: 'ADDTOCART',
+    payload: data,
+  };
+}
+
+export async function getCartItems(cartItem, userCart) {
+  const { data } = await axios.get(
+    `${apiUrl}/api/product/products_by_id?id=${cartItem}&type=array`,
+  );
+  userCart.forEach(cartItem => {
+    data.product.forEach((productDetail, index) => {
+      if (cartItem.id === productDetail._id) {
+        data.product[index].quantity = cartItem.quantity;
+      }
+    });
+  });
+  return {
+    type: 'GET_CART_ITEM',
     payload: data,
   };
 }

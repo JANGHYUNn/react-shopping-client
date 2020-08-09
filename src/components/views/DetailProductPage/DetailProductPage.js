@@ -36,7 +36,6 @@ function DetailProductPage(props) {
             <h1>{Product.title}</h1>
           </div>
           <br />
-          {console.log(Product)}
           <Row gutter={[16, 16]}>
             {/* productImage */}
             <Col lg={12} sm={24}>

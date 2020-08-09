@@ -7,7 +7,9 @@ export default function (state = {}, action) {
     case 'AUTH':
       return { ...state, auth: action.payload };
     case 'ADDTOCART':
-      return { ...state };
+      return { ...state, userData: { ...state.auth }, cart: action.payload };
+    case 'GET_CART_ITEM':
+      return { ...state, cartDetail: action.payload };
     default:
       return state;
   }

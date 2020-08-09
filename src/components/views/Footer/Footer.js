@@ -2,6 +2,7 @@ import React from 'react';
 import { SmileOutlined } from '@ant-design/icons';
 
 export default function Footer() {
+
   return (
     <div
       style={{

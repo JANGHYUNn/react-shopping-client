@@ -12,7 +12,6 @@ export default function (SpecificComponent, option, adminRoute = null) {
   function AuthenticationCheck(props) {
     // redux hook을 이용하여 userReducer 가져오기
     const user = useSelector(state => state.userReducer);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
