@@ -19,13 +19,10 @@ function DetailProductPage(props) {
         `${apiUrl}/api/product/products_by_id?productId=${productId}&type=single`,
       )
       .then(({ data }) => {
-        if (data.success) {
-          setProduct(data.product[0]);
-          setIsLoading(true);
-        } else {
-          alert('상세 정보 가져오기를 실패했습니다.');
-        }
-      });
+        setProduct(data[0]);
+        setIsLoading(true);
+      })
+      .catch(err => alert(err));
   }, []);
 
   return (

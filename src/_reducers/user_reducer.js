@@ -10,6 +10,12 @@ export default function (state = {}, action) {
       return { ...state, userData: { ...state.auth }, cart: action.payload };
     case 'GET_CART_ITEM':
       return { ...state, cartDetail: action.payload };
+    case 'REMOVE_CART_ITEM':
+      return {
+        ...state,
+        cartDetail: action.payload.productInfo,
+        auth: { ...state.auth, cart: action.payload.cart },
+      };
     default:
       return state;
   }

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import './UserCardBlock.css';
@@ -15,7 +16,7 @@ function UserCardBlock(props) {
   };
 
   const renderItems = () =>
-    props.products?.product.map((product, index) => (
+    props.products?.map((product, index) => (
       <tr key={index}>
         <td>
           <img
@@ -27,7 +28,9 @@ function UserCardBlock(props) {
         <td>{product.quantity} EA</td>
         <td>$ {product.price}</td>
         <td>
-          <button type="button">Remove</button>
+          <button type="button" onClick={() => props.remove(product._id)}>
+            Remove
+          </button>
         </td>
       </tr>
     ));

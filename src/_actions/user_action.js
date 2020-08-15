@@ -60,14 +60,36 @@ export async function getCartItems(cartItem, userCart) {
     `${apiUrl}/api/product/products_by_id?id=${cartItem}&type=array`,
   );
   userCart.forEach(cartItem => {
-    data.product.forEach((productDetail, index) => {
+    data.forEach((productDetail, index) => {
       if (cartItem.id === productDetail._id) {
-        data.product[index].quantity = cartItem.quantity;
+        data[index].quantity = cartItem.quantity;
       }
     });
   });
   return {
     type: 'GET_CART_ITEM',
+    payload: data,
+  };
+}
+
+export async function removeCartItem(productId) {
+  const { data } = await axios.get(
+    `${apiUrl}/api/user/removeFromCart?id=${productId}`,
+    {
+      withCredentials: true,
+    },
+  );
+  console.log(data);
+  data.cart.forEach(item => {
+    data.productInfo.forEach((product, index) => {
+      if (item.id === product._id) {
+        data.productInfo[index].quantity = item.quantity;
+      }
+    });
+  });
+
+  return {
+    type: 'REMOVE_CART_ITEM',
     payload: data,
   };
 }
