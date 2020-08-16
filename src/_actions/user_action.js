@@ -79,7 +79,7 @@ export async function removeCartItem(productId) {
       withCredentials: true,
     },
   );
-  console.log(data);
+
   data.cart.forEach(item => {
     data.productInfo.forEach((product, index) => {
       if (item.id === product._id) {
@@ -90,6 +90,21 @@ export async function removeCartItem(productId) {
 
   return {
     type: 'REMOVE_CART_ITEM',
+    payload: data,
+  };
+}
+
+export async function onSuccessBuy(paymentData) {
+  const { data } = await axios.post(
+    `${apiUrl}/api/user/successBy`,
+    paymentData,
+    {
+      withCredentials: true,
+    },
+  );
+
+  return {
+    type: 'ON_SUCCESS_BUY',
     payload: data,
   };
 }

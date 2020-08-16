@@ -11,6 +11,7 @@ import LoginPage from './views/LoginPage/LoginPage';
 import UploadProductPage from './views/UploadProductPage/UploadProductPage';
 import DetailProductPage from './views/DetailProductPage/DetailProductPage';
 import CartPage from './views/CartPage/CartPage';
+import HistoryPage from './views/HistoryPage/HistoryPage';
 
 // hoc
 import auth from '../hoc/auth';
@@ -35,6 +36,7 @@ function App() {
             component={auth(DetailProductPage, null)}
           />
           <Route exact path="/user/cart" component={auth(CartPage, true)} />
+          <Route exact path="/history" component={auth(HistoryPage, true)} />
         </Switch>
       </div>
       <Footer />
